@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/categories_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/daily_dua_card.dart';
+import 'package:ramadan_app/app/view/home/view/widgets/daily_name_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/titles_card.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -11,7 +12,7 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: PaddingExtensionSymetric(context).horizontalPaddingNormal,
       child: Column(
         children: [
@@ -29,9 +30,8 @@ class BodyWidget extends StatelessWidget {
               );
             },
           ),
-          const Expanded(
-            child: DailyDuaCard(),
-          ),
+          const DailyDuaCard(),
+          const DailyNameCard(),
           Align(
             alignment: Alignment.topLeft,
             child: Text(

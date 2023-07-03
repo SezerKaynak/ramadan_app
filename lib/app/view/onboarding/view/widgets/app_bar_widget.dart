@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -18,10 +18,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         TextButton(
           onPressed: () async {
             await CacheManager<bool>().writeData(key: CacheManagerEnum.onboarding.name, value: true).then(
-                  (value) => context.router.replaceNamed(NavigationPaths.location.path),
+                  (value) => context.router.replaceNamed(NavigationPaths.permission.path),
                 );
           },
-          child: const Text('Skip', style: TextStyle(color: AppColors.secondaryColor)),
+          child: Text(context.loc.skip, style: TextStyle(color: context.theme.secondaryHeaderColor)),
         ),
       ],
     );

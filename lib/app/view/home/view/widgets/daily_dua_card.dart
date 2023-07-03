@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
+import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua/daily_dua_service.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/theme/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DailyDuaCard extends StatelessWidget {
@@ -15,11 +16,12 @@ class DailyDuaCard extends StatelessWidget {
     DailyDuaService service =
         DailyDuaService(baseUrl: AppEndpoints.randomAyahBaseUrl);
     return FutureBuilder(
-      future: service.getDailyDua(),
-      builder: (context, snapshot) {
+      future: service.getDailyDua(
+          language: context.read<AppSettingsBloc>().state.locale.languageCode),
+      builder: (context, AsyncSnapshot<DailyDuaModel> snapshot) {
         if (snapshot.hasData) {
           return Card(
-            color: AppColors.cardColor,
+            color: context.theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -37,13 +39,17 @@ class DailyDuaCard extends StatelessWidget {
                       ),
                       Image.asset(
                         "assets/images/titles/Dua Hands.png",
+                        color: context.read<AppSettingsBloc>().state.theme ==
+                                AppTheme.lightTheme
+                            ? Colors.black
+                            : Colors.white,
                       )
                     ],
                   ),
-                  Expanded(
+                  Padding(
+                    padding: context.verticalPaddingLow,
                     child: Text(
-                      context.read<AppSettingsBloc>().state.locale ==
-                              const Locale("tr", "TR")
+                      context.loc.localeName == "tr"
                           ? snapshot
                               .data!
                               .data![snapshot.data!.data!.indexWhere(
@@ -63,24 +69,26 @@ class DailyDuaCard extends StatelessWidget {
                   ),
                   Text(
                     "${snapshot.data!.data![0].surah!.englishName} ${snapshot.data!.data![0].numberInSurah}",
-                    style: context.textTheme.bodyMedium,
+                    style: context.textTheme.labelLarge,
                   ),
                 ],
               ),
             ),
           );
         } else if (snapshot.hasError) {
-          return const Center(
-            child: Text("Error"),
+          return Center(
+            child: Text(snapshot.error.toString()),
           );
         } else {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
+              height: context.height * 0.2,
+              width: context.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

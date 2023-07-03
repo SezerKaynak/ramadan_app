@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -36,16 +35,16 @@ class _BodyWidgetState extends State<BodyWidget> {
           Wrap(
             children: [
               Text(
-                'Select Location',
+                context.loc.locationSelectTitle,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor,
+                      color: context.theme.secondaryHeaderColor,
                     ),
               ),
               Text(
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium ',
+                context.loc.locationSelectDescription,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.secondaryColor,
+                      color: context.theme.secondaryHeaderColor,
                       fontSize: 18,
                     ),
               ),
@@ -60,7 +59,7 @@ class _BodyWidgetState extends State<BodyWidget> {
                   children: [
                     //COUNTRY
                     CustomDropdownButton<String>(
-                      hint: "Select Country",
+                      hint: context.loc.locationSelectCountryText,
                       value: _cubit.selectedCountry,
                       items: _cubit.countryList.map((country) {
                         return DropdownMenuItem<String>(
@@ -75,7 +74,7 @@ class _BodyWidgetState extends State<BodyWidget> {
                     ),
                     //STATE
                     CustomDropdownButton<String>(
-                      hint: "Select State",
+                      hint: context.loc.locationSelectStateText,
                       value: _cubit.selectedState,
                       items: _cubit.stateList.map((state) {
                         return DropdownMenuItem<String>(
@@ -93,7 +92,7 @@ class _BodyWidgetState extends State<BodyWidget> {
                     ),
                     //CITY
                     CustomDropdownButton<String>(
-                      hint: "Select City",
+                      hint: context.loc.locationSelectCityText,
                       value: _cubit.selectedCity,
                       items: _cubit.cityList.map((city) {
                         return DropdownMenuItem<String>(
@@ -124,11 +123,11 @@ class _BodyWidgetState extends State<BodyWidget> {
                       }
                     : null,
                 child: Text(
-                  'Go to Home Page',
+                  context.loc.locationNavigateHomeButtonText,
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
-                      ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
+                      ?.copyWith(color: context.theme.secondaryHeaderColor, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

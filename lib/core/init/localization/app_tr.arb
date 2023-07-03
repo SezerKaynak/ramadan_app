@@ -1,11 +1,11 @@
-{ 
+{
   "appTitle": "Ramazan Uygulaması",
   "@appTitle": {
     "description": "Uygulamanın başlığı"
   },
   "location": "Konum",
   "nextTime": "Sıradaki Zaman",
-  "remainingTime": "Kalan Süre",
+  "remainingTime": "Kalan",
   "timeAlert": "Zaman Uyarısı",
   "alert": "Uyarı ",
   "dailyDua": "Günlük Dua",
@@ -36,5 +36,24 @@
   "days": " Gün",
   "hours": " Saat",
   "minutes": " Dakika",
-  "temp": "Derece"
+  "temp": "Derece",
+  "dailyName": "Günlük İsim",
+  "skip": "Geç",
+  "welcomeToRamadanApp": "Ramazan uygulamasına hoş geldiniz!",
+  "welcomeDescription": "Bu uygulama sizin ibadeti kolaylaştırmanız için tasarlanmıştır.",
+  "prayerTimes": "İbadet Zamanları",
+  "prayerTimesDescription": "Bu uygulama, bulunduğunuz yere göre size namaz vakitleri sağlar.",
+  "dailyDuaDescription": "Sizlere her gün Kur'an'dan ayetler sunuyoruz.",
+  "locationPermissionTitle": "Konumu Etkinleştir",
+  "locationPermissionDescription": "Konum tabanlı özelliklere erişebilirsiniz",
+  "locationPermissionButtonText": "Konuma İzin Ver",
+  "notificationPermissionTitle": "Bildirimleri Etkinleştir",
+  "notificationPermissionDescription": "Yaklaşan namaz vakitleri hakkında bildirimler alabilirsiniz",
+  "notificationPermissionButtonText": "Bildirimlere İzin Ver",
+  "locationSelectTitle": "Konum Seçin",
+  "locationSelectDescription": "Uygulamanın konum bazlı özelliklerini kullanmak için bir konum seçmeniz gerekiyor.",
+  "locationSelectCountryText": "Ülke Seçin",
+  "locationSelectStateText": "Bölge Seçin",
+  "locationSelectCityText": "Şehir Seçin",
+  "locationNavigateHomeButtonText": "Ana Sayfaya Git"
 }

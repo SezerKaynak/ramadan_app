@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -64,11 +63,13 @@ class _NextTimeCardState extends State<NextTimeCard> {
             times = state.prayers[state.selectedPrayerIndex + 1];
             index = 0;
           }
-          List<int> remaningTime;
+          List<int> remainingTime;
           try {
-            remaningTime = calculateRemainingTime(currentTime, times[index], 0);
+            remainingTime =
+                calculateRemainingTime(currentTime, times[index], 0);
           } catch (e) {
-            remaningTime = calculateRemainingTime(currentTime, times[index], 1);
+            remainingTime =
+                calculateRemainingTime(currentTime, times[index], 1);
           }
 
           return Padding(
@@ -111,7 +112,13 @@ class _NextTimeCardState extends State<NextTimeCard> {
                           style: context.textTheme.titleMedium,
                         ),
                         Text(
-                          "${remaningTime[0]}:${remaningTime[1]}",
+                          context.loc.localeName == "tr"
+                              ? remainingTime[0] == 0
+                                  ? "${remainingTime[1]} dk"
+                                  : "${remainingTime[0]} sa ${remainingTime[1] == 0 ? "" : "${remainingTime[1]} dk"}"
+                              : remainingTime[0] == 0
+                                  ? "${remainingTime[1]} m"
+                                  : "${remainingTime[0]} h ${remainingTime[1] == 0 ? "" : "${remainingTime[1]} m"}",
                           style: context.textTheme.titleMedium,
                         ),
                       ],
@@ -125,11 +132,11 @@ class _NextTimeCardState extends State<NextTimeCard> {
           return Shimmer.fromColors(
             enabled: true,
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );
